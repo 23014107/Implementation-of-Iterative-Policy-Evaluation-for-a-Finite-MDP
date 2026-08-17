@@ -99,32 +99,119 @@ Where:
 ## Program
 
 ```python
+import gymnasium as gym
+import numpy as np
+
+# -------------------------------------------------
+# Create FrozenLake environment
+# -------------------------------------------------
+
+env = gym.make("FrozenLake-v1", map_name="4x4", is_slippery=True)
+
+# Access transition model
+env = env.unwrapped
+
+# Number of states and actions
+n_states = env.observation_space.n
+n_actions = env.action_space.n
+
+# Parameters
+gamma = 0.99
+theta = 1e-8
+
+# Random policy: each action has equal probability
+policy = np.ones((n_states, n_actions)) / n_actions
 
 
 # -------------------------------------------------
 # Policy Evaluation Function
 # -------------------------------------------------
 
+def policy_evaluation(env, policy, gamma=0.99, theta=1e-8):
+    """
+    Performs iterative policy evaluation using the Bellman expectation equation.
+
+    Returns:
+        V : Estimated state-value function
+        iteration : Number of iterations used for convergence
+    """
+
+    # Initialize value function
+    V = np.zeros(env.observation_space.n)
+
+    iteration = 0
+
+    while True:
+
+        delta = 0
+
+        # Loop through all states
+        for s in range(env.observation_space.n):
+
+            old_value = V[s]
+
+            new_value = 0
+
+            # Loop through actions
+            for a, action_prob in enumerate(policy[s]):
+
+                # Get transition information
+                for prob, next_state, reward, done in env.P[s][a]:
+
+                    new_value += action_prob * prob * (
+                        reward + gamma * V[next_state] * (not done)
+                    )
+
+            V[s] = new_value
+
+            # Calculate maximum change
+            delta = max(delta, abs(old_value - V[s]))
+
+
+        iteration += 1
+
+        # Check convergence
+        if delta < theta:
+            break
+
+    return V, iteration
+
+
+
+# -------------------------------------------------
+# Run Policy Evaluation
+# -------------------------------------------------
+
+V, iterations = policy_evaluation(env, policy, gamma, theta)
+
 
 # -------------------------------------------------
 # Display Output
 # -------------------------------------------------
 
-# Change the parameters and observe the results
+print("Name: RAMYA P ")
+print("Register Number: 212223240137")
 
+print("\nNumber of Iterations:", iterations)
+
+print("\nState-Value Function:")
+print(V)
+
+print("\nState-Value Function as 4x4 Grid:")
+
+print(np.round(V.reshape(4,4),4))
+
+
+# Close environment
+env.close()
 ```
 
 ---
 
 ## Output
 
-```text
-
-Number of Iterations: 
-
-State-Value Function as 4x4 Grid:
-
-
+```
+<img width="468" height="256" alt="image" src="https://github.com/user-attachments/assets/02ecc1e3-0b64-441b-b8fc-0251800ec349" />
 
 ```
 ---
