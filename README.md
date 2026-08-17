@@ -1,4 +1,6 @@
 # Implementation-of-Iterative-Policy-Evaluation-for-a-Finite-MDP
+# Name : Ramya P
+# Reg no : 212223240137
 ## Aim
 
 To implement iterative policy evaluation using Gymnasium and estimate the state-value function $V^\pi(s)$ for a fixed random policy.
@@ -211,7 +213,8 @@ env.close()
 ## Output
 
 ```
-<img width="468" height="256" alt="image" src="https://github.com/user-attachments/assets/02ecc1e3-0b64-441b-b8fc-0251800ec349" />
+<img width="468" height="256" alt="Screenshot 2026-08-17 203431" src="https://github.com/user-attachments/assets/887d7696-3b3e-44a7-ab6c-9bed3b343c8f" />
+
 
 ```
 ---
@@ -224,7 +227,10 @@ Iterative policy evaluation was implemented successfully using the Gymnasium Fro
 
 ## Inference
 
-```text
+```
+The experiment demonstrates how a value function can be estimated by repeatedly applying Bellman's expectation equation until convergence.
+
+The number of iterations depends on the discount factor, convergence threshold, and environment transition probabilities.
 
 
 
