@@ -212,12 +212,12 @@ env.close()
 
 ## Output
 
-```
+
 <img width="468" height="256" alt="Screenshot 2026-08-17 203431" src="https://github.com/user-attachments/assets/887d7696-3b3e-44a7-ab6c-9bed3b343c8f" />
 
 
-```
----
+
+
 
 ## Result
 
