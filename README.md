@@ -10,11 +10,8 @@ To implement iterative policy evaluation using Gymnasium and estimate the state-
 
 Install the required Python packages:
 
-```bash
 pip install gymnasium numpy
-```
 
----
 
 ## Environment Used
 
